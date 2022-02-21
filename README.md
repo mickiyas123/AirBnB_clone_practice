@@ -6,13 +6,15 @@ This team project is part of ALX Africa Full-Stack Software Engineer program it 
 
 ## First step is to write a command interpreter to manage AirBnB objects
 
-The command interpreter is used for:
+The command interpreter is used to:
 
 * Create a new object
-* Retrieve an object from a file, a database etc
+* Retrieve an object from a file, a database etc...
 * Do operations on objects
 * Update attributes of an object
 * Destroy an object
+
+# Usage
 
 
 
