@@ -6,6 +6,7 @@
 # Standard Library imports
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
     """ class for command interpreter implimentation """
     prompt = '(hbnb) '
@@ -13,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         """ Quit command to exit the program """
         pass
-    
+
     def do_quit(self, inputs):
         """ a method to quit """
         quit()
@@ -21,6 +22,7 @@ class HBNBCommand(cmd.Cmd):
     def do_EOF(self, inputs):
         """ method for exit """
         return True
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
