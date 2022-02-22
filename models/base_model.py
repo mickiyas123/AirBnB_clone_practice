@@ -13,11 +13,21 @@ from datetime import datetime
 class BaseModel:
     """ class for creating base model objects """
 
-    def __init__(self):
-        """ BaseModel Inits"""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+    def __init__(self, *args, **kwargs):
+        """ BaseModel Inits
+
+            args: non keyword argument
+            kwargs: keyword argument
+        """
+        if kwargs:
+            for key in kwargs:
+                if key not in ['created_at', 'updated_at', '__class__']:
+                    setattr(self, key, kwargs[key])
+                self.created_at = datetime.fromisoformat(kwargs['created_at'])
+                self.updated_at = datetime.fromisoformat(kwargs['updated_at'])
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = self.updated_at = datetime.now()
 
     def __str__(self):
         """ return string representattion of the object """
