@@ -6,6 +6,7 @@
 # Standar Library imports
 import json
 from os.path import exists
+from textwrap import indent
 
 
 class FileStorage:
@@ -43,7 +44,7 @@ class FileStorage:
         for key in objects_to_dict:
             objects_to_dict[key] = objects_to_dict[key].to_dict()
         with open(FileStorage.__file_path, "w") as json_file:
-            json.dump(objects_to_dict, json_file)
+            json.dump(objects_to_dict, json_file, indent=4)
 
     def reload(self):
         """ deserializes the JSON file to __objects if __file_path exists
