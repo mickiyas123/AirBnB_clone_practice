@@ -52,11 +52,18 @@ class FileStorage:
         """
         from ..base_model import BaseModel
         from ..user import User
+        from ..amenity import Amenity
+        from ..city import City
+        from ..place import Place
+        from ..state import State
+        from ..review import Review
 
         file_exists = exists(FileStorage.__file_path)
         reloaded_dict = {}
 
-        classes = {"BaseModel": BaseModel, "User": User}
+        classes = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity,
+                   "City": City, "Place": Place, "State": State,
+                   "Review": Review}
 
         if file_exists:
             with open(FileStorage.__file_path, "r") as json_file:
