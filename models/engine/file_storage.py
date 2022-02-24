@@ -6,7 +6,6 @@
 # Standar Library imports
 import json
 from os.path import exists
-from textwrap import indent
 
 
 class FileStorage:
@@ -52,11 +51,15 @@ class FileStorage:
             to dict then class instance
         """
         from ..base_model import BaseModel
+        from ..user import User
+
         file_exists = exists(FileStorage.__file_path)
         reloaded_dict = {}
+
+        classes = {"BaseModel": BaseModel, "User": User}
 
         if file_exists:
             with open(FileStorage.__file_path, "r") as json_file:
                 reloaded_dict = json.load(json_file)
-            for key in reloaded_dict:
-                FileStorage.__objects[key] = BaseModel(**reloaded_dict[key])
+            for key, val in reloaded_dict.items():
+                FileStorage.__objects[key] = classes[val['__class__']](**val)

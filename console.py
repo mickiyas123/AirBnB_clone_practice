@@ -8,21 +8,22 @@ import cmd
 
 # Local application imports
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 
 
 class HBNBCommand(cmd.Cmd):
     """ class for command interpreter implimentation """
     prompt = '(hbnb) '
+    classes = {"BaseModel": BaseModel, "User": User}
 
     def do_create(self, input_class):
         """ Method for creating new instance of the input class """
-        class_name = ['BaseModel']
         if input_class:
-            if input_class in class_name:
-                my_model = BaseModel()
-                my_model.save()
-                print(my_model.id)
+            if input_class in self.classes:
+                new_instance = self.classes[input_class]()
+                new_instance.save()
+                print(new_instance.id)
             else:
                 print("** class doesn't exist **")
         else:
@@ -33,11 +34,10 @@ class HBNBCommand(cmd.Cmd):
            an instance based on the class name and id
            the changed is saved into the JSON file
         """
-        class_name = ['BaseModel']
         if not class_and_id:
             print("** class name missing **")
         elif len(class_and_id.split()) == 1:
-            if class_and_id not in class_name:
+            if class_and_id not in self.classes:
                 print("** class doesn't exist **")
             else:
                 print("** instance id missing **")
@@ -58,11 +58,10 @@ class HBNBCommand(cmd.Cmd):
            based on the class name and id
            the changed is saved into the JSON file
         """
-        class_name = ['BaseModel']
         if not class_and_id:
             print("** class name missing **")
         elif len(class_and_id.split()) == 1:
-            if class_and_id not in class_name:
+            if class_and_id not in self.classes:
                 print("** class doesn't exist **")
             else:
                 print("** instance id missing **")
@@ -81,26 +80,31 @@ class HBNBCommand(cmd.Cmd):
         """Prints all string representation of all
            instances based or not on the class name
         """
-        class_name = ['BaseModel', '']
-        if input_class not in class_name:
-            print("** class doesn't exist **")
-        else:
-            list_of_str = []
-            all_objects = storage.all()
+        list_of_str = []
+        all_objects = storage.all()
+
+        if input_class == '':
             for key in all_objects.keys():
                 list_of_str.append(str(all_objects[key]))
             print(list_of_str)
+        elif input_class in self.classes:
+            for key, val in all_objects.items():
+                if input_class == type(val).__name__:
+                    list_of_str.append(str(all_objects[key]))
+            print(list_of_str)
+        else:
+            print("** class doesn't exist **")
+        
 
     def do_update(self, input_argument):
         """Updates an instance based on the class name and id by
            adding or updating attribute
            the change  is saved into the JSON file
         """
-        class_name = ['BaseModel']
         if not input_argument:
             print("** class name missing **")
         elif len(input_argument.split()) == 1:
-            if input_argument not in class_name:
+            if input_argument not in self.classes:
                 print("** class doesn't exist **")
             else:
                 print("** instance id missing **")
