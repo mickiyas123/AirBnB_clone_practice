@@ -5,9 +5,6 @@
 
 # Standard Library imports
 import cmd
-from operator import imod
-
-from django.forms import models
 
 # Local application imports
 from models.base_model import BaseModel
