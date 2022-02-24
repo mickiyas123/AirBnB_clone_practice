@@ -25,6 +25,9 @@ The command interpreter is used to:
 |   destroy | destroy specific class instances |  destroy  User  3707-c04e-43eb-8b99-f9b2fdee73c2 |
 |   update  | update class instances attribute |  update  BaseModel 3707-c04e-43eb-8b99-f9b2fdee73c2  first_name "Mark"|
 
+# Author
+
+[Mickiy](https://www.github.com/mickiyas123)
 
 
 
