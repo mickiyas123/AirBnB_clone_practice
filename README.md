@@ -16,6 +16,16 @@ The command interpreter is used to:
 
 # Usage
 
+|  Command  |    Description                   |    Example      |
+| --------  | ------------------------         |  -------------- |
+| ./console | open the command line            |    ./console     |
+|   all     | show all class instances         |  all or all  "class_name" |
+|  create   | create class instances           |  create  "class_name" |
+|   show    | show speicifc instance           |  show  "clas_name"  "id"|
+|   destroy | destroy specific class instances |  destroy  "class_name"  "id" |
+|   update  | update class instances attribute |  update  "class_name"  "id"  "attribute_name"    "attribute_value"|
+
+
 
 
 
