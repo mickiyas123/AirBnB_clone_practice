@@ -5,6 +5,7 @@
 
 # Standard Library imports
 import cmd
+import shlex
 
 # Local application imports
 from models.base_model import BaseModel
@@ -127,11 +128,10 @@ class HBNBCommand(cmd.Cmd):
         elif len(input_argument.split()) == 3:
             print("** value missing **")
         else:
-            inputs = input_argument.split()
+            inputs = shlex.split(input_argument)
             key_to_find = inputs[0] + "." + inputs[1]
             all_objects = storage.all()
             key_list = list(all_objects.keys())
-            inputs[3] = inputs[3][1:-1]
             if key_to_find in key_list:
                 setattr(all_objects[key_to_find], inputs[2], inputs[3])
             storage.save()
